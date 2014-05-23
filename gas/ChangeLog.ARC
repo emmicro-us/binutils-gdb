@@ -1,5 +1,9 @@
 2014-05-23  Joern Rennecke  <joern.rennecke@embecosm.com>
 
+	* config/tc-arc.c (arc_extra_reloc): Set size of frag to 0.
+
+2014-05-23  Joern Rennecke  <joern.rennecke@embecosm.com>
+
 	* config/tc-arc.c (md_apply_fix) <BFD_RELOC_ARC_TLS_LE_32>:
 	Handle like BFD_RELOC_ARC_TLS_DTPOFF.
 	<BFD_RELOC_ARC_TLS_LE_S9>: Handle like BFD_RELOC_ARC_TLS_DTPOFF_S9.
