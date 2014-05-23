@@ -6597,11 +6597,13 @@ arc_extra_reloc (int r_type)
       lab = symbol_find_or_make (lab_name);
       *input_line_pointer = c;
     }
+  /* These relocs (so far) pertain to the following instruction, which
+     might allocate a new frag, so set the size to zero to avoid
+     an abort from the size/location sanity check.  */
   fixS *fixP
     = fix_new (frag_now,	/* Which frag?  */
 	       frag_now_fix (),	/* Where in that frag?  */
-				/* size: 1, 2, or 4 usually.  */
-	       r_type == BFD_RELOC_ARC_TLS_GD_DEF ? 0 : 2,
+	       0,		/* size: 1, 2, or 4 usually.  */
 	       sym,		/* X_add_symbol.  */
 	       0,		/* X_add_number.  */
 	       FALSE,		/* TRUE if PC-relative relocation.  */
