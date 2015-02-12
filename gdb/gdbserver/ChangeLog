@@ -42,6 +42,13 @@
 	(struct lwp_info) <stop_reason>: Now an enum target_stop_reason.
 	* linux-x86-low.c (x86_linux_prepare_to_resume): Adjust.
 
+2015-02-19  Antoine Tremblay  <antoine.tremblay@ericsson.com>
+
+	PR breakpoints/16812
+	* linux-low.c (wstatus_maybe_breakpoint): Remove.
+	(linux_low_filter_event): Update wstatus_maybe_breakpoint name.
+	(linux_wait_1): Report SIGTRAP,SIGILL,SIGSEGV.
+
 2015-01-10  Joel Brobecker  <brobecker@adacore.com>
 
 	* i387-fp.c (i387_cache_to_xsave): In look over

@@ -1,3 +1,9 @@
+2015-02-19  Antoine Tremblay  <antoine.tremblay@ericsson.com>
+
+	PR breakpoints/16812
+	* gdb.base/catch-gdb-caused-signals.c: New file.
+	* gdb.base/catch-gdb-caused-signals.exp: New file.
+
 2015-05-12  Doug Evans  <dje@google.com>
 
 	* gdb.python/py-xmethods.exp: Add ptype tests.
