@@ -1,3 +1,11 @@
+2015-02-23  Pedro Alves  <palves@redhat.com>
+
+	* remote.c (skip_to_semicolon): New function.
+	(remote_parse_stop_reply) <T stop reply>: Use it.  Don't
+	special case the stop reasons that look like hex numbers
+	upfront.  Instead handle real register numbers after matching
+	all the known stop reasons.
+
 2015-05-13  Joel Brobecker  <brobecker@adacore.com>
 
 	* version.in: Set GDB version number to 7.9.1.
