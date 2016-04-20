@@ -47,6 +47,8 @@
 #ifndef ARC_TDEP_H
 #define ARC_TDEP_H
 
+#define ARC_DEBUG_COMMANDS 1
+
 /* -------------------------------------------------------------------------- */
 /*!@file 
    # ARC General Target Dependant Header for GDB

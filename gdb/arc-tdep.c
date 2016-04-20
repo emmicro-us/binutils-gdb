@@ -2944,6 +2944,33 @@ show_arc_command (char *args, int from_tty)
   cmd_show_list (showarccmdlist, from_tty, "");
 }
 
+#ifdef ARC_DEBUG_COMMANDS
+/* Accepts single argument - address of instruction to disassemble. */
+static void
+print_disasm_info (char *args, int from_tty)
+{
+  if (args != NULL && strlen (args) > 0)
+    {
+      CORE_ADDR address;
+      struct disassemble_info di;
+      struct gdbarch* gdbarch;
+      struct arcDisState instr;
+      unsigned char i;
+
+      address = string_to_core_addr (args);
+      gdbarch = target_gdbarch ();
+      arc_initialize_disassembler (gdbarch, &di);
+      instr = arcAnalyzeInstr (address, &di);
+
+      arc_print_insn_state (instr);
+
+      fprintf_unfiltered (gdb_stdlog, "tcnt = %i\n", instr.tcnt);
+      for (i = 0; i < instr.tcnt; i++)
+	fprintf_unfiltered (gdb_stdlog, "targets[%i] = 0x%08x\n", i, instr.targets[i]);
+    }
+}
+#endif
+
 /* this function is called from gdb */
 void
 _initialize_arc_tdep (void)
@@ -2969,6 +2996,11 @@ _initialize_arc_tdep (void)
   add_prefix_cmd ("arc", no_class, show_arc_command,
 		  _("Various ARC-specific commands."),
 		  &showarccmdlist, "show arc ", 0, &showlist);
+
+#ifdef ARC_DEBUG_COMMANDS
+  add_cmd ("print_disasm_info", class_info, print_disasm_info,
+      "print instruction", &showarccmdlist);
+#endif
 
   /* Debug internals for ARC GDB.  */
   add_setshow_zinteger_cmd ("arc", class_maintenance,
