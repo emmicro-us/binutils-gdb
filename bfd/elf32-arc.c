@@ -2257,6 +2257,30 @@ elf_arc_adjust_dynamic_symbol (struct bfd_link_info *info,
       return TRUE;
     }
 
+  /* TODO: Have to implement this functionality as X86 target to PASS
+     "Common symbol override test".  */
+#if 0
+  if (1)
+    {
+      struct elf_dyn_relocs *p;
+      struct elf_link_hash_table *eh = (struct elf_link_hash_entry *) h;
+      for (p = eh->dyn_relocs; p != NULL; p = p->next)
+       {
+         s = p->sec->output_section;
+         if (s != NULL && (s->flags & SEC_READONLY) != 0)
+           break;
+       }
+
+      /* If we didn't find any dynamic relocs in read-only sections, then
+        we'll be keeping the dynamic relocs and avoiding the copy reloc.  */
+      if (p == NULL)
+       {
+         h->non_got_ref = 0;
+         return TRUE;
+       }
+    }
+#endif
+
   /* We must allocate the symbol in our .dynbss section, which will
      become part of the .bss section of the executable.  There will be
      an entry for this symbol in the .dynsym section.  The dynamic
