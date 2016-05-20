@@ -1690,6 +1690,10 @@ elf_arc_relocate_section (bfd *		   output_bfd,
 
       DEBUG_ARC_RELOC (reloc_data);
 
+      /* Make sure we have with a dynamic linker.  In case of GOT and PLT
+         the sym_section should point to .got or .plt respectively.  */
+      if (is_reloc_for_GOT (howto) || is_reloc_for_PLT (howto))
+	BFD_ASSERT (reloc_data.sym_section != NULL);
 
       if (arc_do_relocation (contents, reloc_data, info) != bfd_reloc_ok)
 	return FALSE;
