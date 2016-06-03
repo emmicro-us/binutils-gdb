@@ -1502,6 +1502,7 @@ proc run_cc_link_tests { ldtests } {
     global CC
     global CXX
     global CFLAGS
+    global LDFLAG
     global CXXFLAGS
     global ar
     global exec_output
@@ -1536,6 +1537,9 @@ proc run_cc_link_tests { ldtests } {
 	#verbose -log "warnings  is $warnings"
 
 	# Compile each file in the test.
+
+    set cflags "$cflags $LDFLAG"
+
 	foreach src_file $src_files {
 	    set fileroot "[file rootname [file tail $src_file]]"
 	    set objfile "tmpdir/$fileroot.o"
@@ -1550,6 +1554,7 @@ proc run_cc_link_tests { ldtests } {
 		ld_compile "$CC -c $CFLAGS $cflags" $srcdir/$subdir/$src_file $objfile
 	    }
 	}
+
 
 	# Clear error and warning counts.
 	reset_vars
@@ -1566,9 +1571,9 @@ proc run_cc_link_tests { ldtests } {
 	    if { ![ar_simple_create $ar $ldflags $binfile "$objfiles"] } {
 		fail $testname
 		set failed 1
-	    }
+	    } 
 	} else {
-	    if { ![ld_simple_link $cc_cmd $binfile "$board_cflags -L$srcdir/$subdir $ldflags $objfiles"] } {
+	    if { ![ld_simple_link $cc_cmd $binfile "$board_cflags -L$srcdir/$subdir $ldflags $LDFLAG $objfiles"] } {
 		set failed 1
 	    }
 
