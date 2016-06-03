@@ -1548,6 +1548,7 @@ proc run_cc_link_tests { ldtests } {
 	    # We ignore warnings since some compilers may generate
 	    # incorrect section attributes and the assembler will warn
 	    # them.
+        #
 	    if { [ string match "c++" $lang ] } {
 		ld_compile "$CXX -c $CXXFLAGS $cflags" $srcdir/$subdir/$src_file $objfile
 	    } else {
