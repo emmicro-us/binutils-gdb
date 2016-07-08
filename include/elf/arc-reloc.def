@@ -490,3 +490,10 @@ ARC_RELOC_HOWTO(ARC_S21H_PCREL_PLT, 77, \
                 replace_disp21h, \
                 signed, \
                 ( ME ( ( ( ( L + A ) - P ) >> 1 ) ) ))
+
+ARC_RELOC_HOWTO(ARC_JLI_SECTOFF, 63, \
+                2, \
+                10, \
+                replace_jli, \
+                bitfield, \
+                ( ( S - JLI ) ))
